@@ -10,7 +10,8 @@
   "dependencies": {
     "gatsby": "^2.0.0",
     "react": "^16.5.1",
-    "react-dom": "^16.5.1"
+    "react-dom": "^16.5.1",
+    "scrollmagic": "^2.0.6"
   },
   "devDependencies": {
     "prettier": "^1.14.3"
