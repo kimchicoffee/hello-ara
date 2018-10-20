@@ -1,59 +1,62 @@
 import React from "react";
-import styled, { keyframes } from "styled-components";
+import styled, { injectGlobal } from "styled-components";
+import ScrollMagic from "scrollmagic";
+import Message from "./Message.jsx";
+import Panel from "./Panel.jsx";
+import Hello from "./Hello.jsx";
 
-const blinkCaret = keyframes`
-{ 50% { border-color: transparent; } }
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const StyledHello = styled.h1`
-  text-alight: center;
-  font: 300% Consolas, Monaco, monospace;
-  border-right: 0.1rem solid black;
-  margin: 2rem 1rem;
-  animation: ${blinkCaret} 0.75s step-end infinite;
-  @media (max-width: 768px) {
-    font-size: 1.5rem;
+injectGlobal`
+  html, body, #___gatsby{
+    height: 100%;
+    width: 100%;
+  }
+  #___gatsby {
+    > div, > div > article {
+        height: 100%;
+        width: 100%;  
+    }
   }
 `;
 
-class Hello extends React.Component {
+const Wrapper = styled.div``;
+
+export default class Scroll extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { quote: "", quoteArray: "Hello, 아라!".split("") };
-  }
-
-  type() {
-    let char = this.state.quoteArray[0];
-    if (this.state.quoteArray.length > 0) {
-      this.setState(prevState => ({
-        quote: prevState.quote + char,
-        quoteArray: prevState.quoteArray.splice(1)
-      }));
-    }
+    this.controller = new ScrollMagic.Controller({
+      globalSceneOptions: {
+        triggerHook: "onLeave"
+      }
+    });
   }
 
   componentDidMount() {
-    if (this.state.quoteArray.length > 0) {
-      this.interval = setInterval(() => this.type(), 500);
+    const slides = document.querySelectorAll(".panel");
+    // create scene for every slide
+    for (var i = 0; i < slides.length; i++) {
+      new ScrollMagic.Scene({
+        triggerElement: slides[i]
+      })
+        .setPin(slides[i])
+        .addIndicators() // add indicators (requires plugin)
+        .addTo(this.controller);
     }
   }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
   render() {
-    return <StyledHello> {this.state.quote}</StyledHello>;
+    return (
+      <article>
+        <Panel className="panel" background="black" color="white">
+          <Message>404 Not found</Message>
+        </Panel>
+        <Panel className="panel" background="white" color="black">
+          <Message>TWO</Message>
+        </Panel>
+        <Panel className="panel" background="#38ced7" color="black">
+          <Wrapper>
+            <Hello />
+          </Wrapper>
+        </Panel>
+      </article>
+    );
   }
 }
-
-export default () => (
-  <Wrapper>
-    <Hello />
-  </Wrapper>
-);
