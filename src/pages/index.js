@@ -1,6 +1,5 @@
 import React from "react";
 import styled, { injectGlobal } from "styled-components";
-import ScrollMagic from "scrollmagic";
 import Message from "./Message.jsx";
 import Panel from "./Panel.jsx";
 import Hello from "./Hello.jsx";
@@ -23,23 +22,27 @@ const Wrapper = styled.div``;
 export default class Scroll extends React.Component {
   constructor(props) {
     super(props);
-    this.controller = new ScrollMagic.Controller({
-      globalSceneOptions: {
-        triggerHook: "onLeave"
-      }
-    });
   }
 
   componentDidMount() {
-    const slides = document.querySelectorAll(".panel");
-    // create scene for every slide
-    for (var i = 0; i < slides.length; i++) {
-      new ScrollMagic.Scene({
-        triggerElement: slides[i]
-      })
-        .setPin(slides[i])
-        .addIndicators() // add indicators (requires plugin)
-        .addTo(this.controller);
+    const isBrowser = typeof window != "undefined";
+    const ScrollMagic = isBrowser ? require("scrollmagic") : undefined;
+    if (ScrollMagic) {
+      this.controller = new ScrollMagic.Controller({
+        globalSceneOptions: {
+          triggerHook: "onLeave"
+        }
+      });
+      const slides = document.querySelectorAll(".panel");
+      // create scene for every slide
+      for (var i = 0; i < slides.length; i++) {
+        new ScrollMagic.Scene({
+          triggerElement: slides[i]
+        })
+          .setPin(slides[i])
+          .addIndicators() // add indicators (requires plugin)
+          .addTo(this.controller);
+      }
     }
   }
   render() {
