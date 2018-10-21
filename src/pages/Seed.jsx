@@ -2,7 +2,7 @@ import React from "react";
 
 const Seed = ({ className }) => (
   <svg
-    viewBox="0 0 744.09447 1052.362179"
+    viewBox="200 200 500 1000"
     xmlns="http://www.w3.org/2000/svg"
     className={className}
   >

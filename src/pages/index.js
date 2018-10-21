@@ -1,9 +1,9 @@
 import React from "react";
 import styled, { injectGlobal, keyframes } from "styled-components";
-import Message from "./Message.jsx";
 import Panel from "./Panel.jsx";
 import Hello from "./Hello.jsx";
 import SeedSVG from "./Seed.jsx";
+import FlowerSVG from "./Flower.jsx";
 const isBrowser = typeof window !== "undefined";
 const ScrollMagic = isBrowser ? require("scrollmagic") : undefined;
 
@@ -27,10 +27,17 @@ const spiningSeed = keyframes`
 
 const Seed = styled(SeedSVG)`
   position: relative;
+  width: 250px;
+  height: 250px;
+  top: 30%;
+  animation: ${spiningSeed} infinite 4000ms linear;
+`;
+
+const Flower = styled(FlowerSVG)`
+  position: relative;
   width: 300px;
   height: 300px;
-  top: 20%;
-  animation: ${spiningSeed} infinite 4000ms linear;
+  top: 50%;
 `;
 
 const Wrapper = styled.div``;
@@ -65,10 +72,10 @@ export default class Scroll extends React.Component {
     return (
       <article>
         <Panel className="panel" background="white" color="red">
-          <Seed className="seed" />
+          <Seed />
         </Panel>
         <Panel className="panel" background="white" color="black">
-          <Message>TWO</Message>
+          <Flower />
         </Panel>
         <Panel className="panel" background="#38ced7" color="black">
           <Wrapper>
