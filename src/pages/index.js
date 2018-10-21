@@ -22,10 +22,7 @@ const Wrapper = styled.div``;
 export default class Scroll extends React.Component {
   constructor(props) {
     super(props);
-  }
-
-  componentDidMount() {
-    const isBrowser = typeof window != "undefined";
+    const isBrowser = typeof window !== "undefined";
     const ScrollMagic = isBrowser ? require("scrollmagic") : undefined;
     if (ScrollMagic) {
       this.controller = new ScrollMagic.Controller({
