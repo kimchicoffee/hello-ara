@@ -5,8 +5,8 @@ const Panel = styled.section`
   min-width: 100%;
   display: flex;
   justify-content: center;
-  background: ${props => props.background}
-  color: ${props => props.color}
+  background: ${props => props.background};
+  color: ${props => props.color};
   position: relative;
   align-items: center;
   flex-direction: column;    
