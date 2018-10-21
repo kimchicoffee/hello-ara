@@ -4,8 +4,6 @@ import Panel from "./Panel.jsx";
 import Hello from "./Hello.jsx";
 import SeedSVG from "./Seed.jsx";
 import FlowerSVG from "./Flower.jsx";
-const isBrowser = typeof window !== "undefined";
-const ScrollMagic = isBrowser ? require("scrollmagic") : undefined;
 
 injectGlobal`
   html, body, #___gatsby{
@@ -15,7 +13,8 @@ injectGlobal`
   #___gatsby {
     > div, > div > article {
         height: 100%;
-        width: 100%;  
+        width: 100%;
+        position: relative;
     }
   }
 `;
@@ -26,7 +25,7 @@ const spiningSeed = keyframes`
 `;
 
 const Seed = styled(SeedSVG)`
-  position: relative;
+  position: fixed;
   width: 250px;
   height: 250px;
   top: 30%;
@@ -34,7 +33,7 @@ const Seed = styled(SeedSVG)`
 `;
 
 const Flower = styled(FlowerSVG)`
-  position: relative;
+  position: ${props => (props.sticky ? "fixed" : "relative")};
   width: 300px;
   height: 300px;
   top: 50%;
@@ -45,39 +44,34 @@ const Wrapper = styled.div``;
 export default class Scroll extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { isFlowerSticky: false };
+    this.setFlowerSticky = this.setFlowerSticky.bind(this);
+  }
 
-    if (ScrollMagic) {
-      this.controller = new ScrollMagic.Controller({
-        globalSceneOptions: {
-          triggerHook: "onLeave"
-        }
-      });
+  setFlowerSticky() {
+    var flower = document.getElementById("flower");
+    var sticky = flower.offsetTop;
+    if (window.pageYOffset > sticky/2) {
+      this.setState({ isFlowerSticky: true });
+    } else {
+      this.setState({ isFlowerSticky: false });
     }
   }
 
   componentDidMount() {
-    const slides = document.querySelectorAll(".panel");
-    // create scene for every slide
-    for (let i = 0; i < slides.length; i++) {
-      new ScrollMagic.Scene({
-        triggerElement: slides[i]
-      })
-        .setPin(slides[i])
-        .addIndicators() // add indicators (requires plugin)
-        .addTo(this.controller);
-    }
+    window.addEventListener("scroll", this.setFlowerSticky);
   }
 
   render() {
     return (
       <article>
-        <Panel className="panel" background="white" color="red">
+        <Panel background="white" color="red">
           <Seed />
         </Panel>
-        <Panel className="panel" background="white" color="black">
-          <Flower />
+        <Panel background="white" color="black" id="flower">
+          <Flower sticky={this.state.isFlowerSticky} />
         </Panel>
-        <Panel className="panel" background="#38ced7" color="black">
+        <Panel background="#38ced7" color="black">
           <Wrapper>
             <Hello />
           </Wrapper>

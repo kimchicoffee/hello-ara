@@ -8,8 +8,8 @@ const Flower = ({ className }) => (
   >
     <defs>
       <linearGradient id="a">
-        <stop stop-color="#568a00" offset="0" />
-        <stop stop-color="#568a00" stop-opacity="0" offset="1" />
+        <stop stopColor="#568a00" offset="0" />
+        <stop stopColor="#568a00" stopOpacity="0" offset="1" />
       </linearGradient>
       <linearGradient
         id="c"
