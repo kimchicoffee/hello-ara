@@ -27,20 +27,18 @@ class Hello extends React.Component {
         quote: prevState.quote + char,
         quoteArray: prevState.quoteArray.splice(1)
       }));
+    } else {
+      this.setState({
+        quoteArray: "Hello, 아라!".split(""),
+        quote: ""
+      });
     }
   }
 
   componentDidMount() {
-    const hello = document.getElementById("hello");
-
-    window.addEventListener("scroll", () => {
-      if (
-        hello.offsetTop + 20 >= hello.getBoundingClientRect().top &&
-        this.state.quoteArray.length > 0
-      ) {
-        this.interval = setInterval(() => this.type(), 500);
-      }
-    });
+    if (this.state.quoteArray.length > 0) {
+      this.interval = setInterval(() => this.type(), 500);
+    }
   }
 
   componentWillUnmount() {
@@ -48,7 +46,7 @@ class Hello extends React.Component {
   }
 
   render() {
-    return <StyledHello id="hello"> {this.state.quote}</StyledHello>;
+    return <StyledHello> {this.state.quote}</StyledHello>;
   }
 }
 
