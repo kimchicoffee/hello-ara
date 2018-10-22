@@ -6,10 +6,13 @@ const Panel = styled.section`
   display: flex;
   justify-content: center;
   background: ${props => props.background};
+  background-image: url(${props =>
+    props.backgroundImg ? props.backgroundImg : "none"});
+  background-size: cover;
   color: ${props => props.color};
   position: relative;
   align-items: center;
-  flex-direction: column;    
+  flex-direction: column;
 `;
 
 export default Panel;

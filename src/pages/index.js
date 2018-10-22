@@ -51,7 +51,7 @@ export default class Scroll extends React.Component {
   setFlowerSticky() {
     var flower = document.getElementById("flower");
     var sticky = flower.offsetTop;
-    if (window.pageYOffset > sticky/2) {
+    if (window.pageYOffset > sticky / 2) {
       this.setState({ isFlowerSticky: true });
     } else {
       this.setState({ isFlowerSticky: false });
@@ -65,7 +65,11 @@ export default class Scroll extends React.Component {
   render() {
     return (
       <article>
-        <Panel background="white" color="red">
+        <Panel
+          background="white"
+          color="red"
+          backgroundImg="http://c1.staticflickr.com/5/4073/4770902412_02451bbe46_b.jpg"
+        >
           <Seed />
         </Panel>
         <Panel background="white" color="black" id="flower">
