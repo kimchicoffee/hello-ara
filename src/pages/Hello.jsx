@@ -31,9 +31,15 @@ class Hello extends React.Component {
   }
 
   componentDidMount() {
-    if (this.state.quoteArray.length > 0) {
-      this.interval = setInterval(() => this.type(), 500);
-    }
+    const hello = document.getElementById("hello");
+    window.addEventListener("scroll", () => {
+      if (
+        hello.offsetTop >= hello.getBoundingClientRect().top &&
+        this.state.quoteArray.length > 0
+      ) {
+        this.interval = setInterval(() => this.type(), 500);
+      }
+    });
   }
 
   componentWillUnmount() {
@@ -41,7 +47,7 @@ class Hello extends React.Component {
   }
 
   render() {
-    return <StyledHello> {this.state.quote}</StyledHello>;
+    return <StyledHello id="hello"> {this.state.quote}</StyledHello>;
   }
 }
 
