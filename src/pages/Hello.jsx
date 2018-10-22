@@ -7,7 +7,7 @@ const blinkCaret = keyframes`
 
 const StyledHello = styled.h1`
   font: 300% Consolas, Monaco, monospace;
-  border-right: 0.1rem solid black;
+  border-right: 0.1rem solid white;
   animation: ${blinkCaret} 0.75s step-end infinite;
   @media (max-width: 768px) {
     font-size: 1.5rem;
@@ -32,9 +32,10 @@ class Hello extends React.Component {
 
   componentDidMount() {
     const hello = document.getElementById("hello");
+
     window.addEventListener("scroll", () => {
       if (
-        hello.offsetTop >= hello.getBoundingClientRect().top &&
+        hello.offsetTop + 20 >= hello.getBoundingClientRect().top &&
         this.state.quoteArray.length > 0
       ) {
         this.interval = setInterval(() => this.type(), 500);

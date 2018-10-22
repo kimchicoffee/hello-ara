@@ -28,7 +28,7 @@ const Seed = styled(SeedSVG)`
   position: fixed;
   width: 250px;
   height: 250px;
-  top: 30%;
+  top: 50%;
   animation: ${spiningSeed} infinite 4000ms linear;
 `;
 
@@ -49,9 +49,9 @@ export default class Scroll extends React.Component {
   }
 
   setFlowerSticky() {
-    var flower = document.getElementById("flower");
-    var sticky = flower.offsetTop;
-    if (window.pageYOffset > sticky / 2) {
+    const flower = document.getElementById("flower");
+    const sticky = flower.offsetTop;
+    if (window.pageYOffset >= sticky) {
       this.setState({ isFlowerSticky: true });
     } else {
       this.setState({ isFlowerSticky: false });
@@ -78,9 +78,9 @@ export default class Scroll extends React.Component {
           id="flower"
           backgroundImg=" //c1.staticflickr.com/5/4715/38770613995_f42c09f8c7_h.jpg"
         >
-          <Flower sticky={this.state.isFlowerSticky} />
+          <Flower sticky={this.state.isFlowerSticky} id="flower" />
         </Panel>
-        <Panel background="#38ced7" color="black">
+        <Panel background="#38ced7" color="white">
           <Wrapper>
             <Hello />
           </Wrapper>
