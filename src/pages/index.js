@@ -72,7 +72,12 @@ export default class Scroll extends React.Component {
         >
           <Seed />
         </Panel>
-        <Panel background="white" color="black" id="flower">
+        <Panel
+          background="white"
+          color="black"
+          id="flower"
+          backgroundImg=" //c1.staticflickr.com/5/4715/38770613995_f42c09f8c7_h.jpg"
+        >
           <Flower sticky={this.state.isFlowerSticky} />
         </Panel>
         <Panel background="#38ced7" color="black">
