@@ -4,6 +4,7 @@ import Panel from "./Panel.jsx";
 import Hello from "./Hello.jsx";
 import SeedSVG from "./Seed.jsx";
 import FlowerSVG from "./Flower.jsx";
+import araImage from "./ara.jpg";
 
 injectGlobal`
   html, body, #___gatsby{
@@ -39,7 +40,25 @@ const Flower = styled(FlowerSVG)`
   top: 50%;
 `;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const AraWrapper = styled.div`
+  width: 400px;
+
+  @media only screen and (max-width: 600px) {
+    width: 80%;
+  }
+`;
+
+const Ara = styled.img`
+  width: 100%;
+  height: auto;
+`;
 
 export default class Scroll extends React.Component {
   constructor(props) {
@@ -82,6 +101,9 @@ export default class Scroll extends React.Component {
         </Panel>
         <Panel background="#38ced7" color="white">
           <Wrapper>
+            <AraWrapper>
+              <Ara src={araImage} />
+            </AraWrapper>
             <Hello />
           </Wrapper>
         </Panel>
