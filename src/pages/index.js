@@ -33,19 +33,21 @@ const Seed = styled(SeedSVG)`
   animation: ${spiningSeed} infinite 4000ms linear;
 `;
 
+const bounceFlower = keyframes`
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(0, 100px, 0); }
+`;
+
 const Flower = styled(FlowerSVG)`
   position: ${props => (props.sticky ? "fixed" : "relative")};
   width: 300px;
   height: 300px;
-  top: 50%;
+  top: 30%;
+  animation: ${bounceFlower} infinite 1s alternate;
+  animation-timing-function: cubic-bezier(.5,0.05,1,.5);
 `;
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
+const Wrapper = styled.div``;
 
 const AraWrapper = styled.div`
   width: 400px;
@@ -58,6 +60,7 @@ const AraWrapper = styled.div`
 const Ara = styled.img`
   width: 100%;
   height: auto;
+  border-radius: 50%;
 `;
 
 export default class Scroll extends React.Component {
@@ -100,10 +103,10 @@ export default class Scroll extends React.Component {
           <Flower sticky={this.state.isFlowerSticky} id="flower" />
         </Panel>
         <Panel background="#38ced7" color="white">
+          <AraWrapper>
+            <Ara src={araImage} />
+          </AraWrapper>
           <Wrapper>
-            <AraWrapper>
-              <Ara src={araImage} />
-            </AraWrapper>
             <Hello />
           </Wrapper>
         </Panel>

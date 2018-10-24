@@ -9,8 +9,10 @@ const StyledHello = styled.h1`
   font: 300% Consolas, Monaco, monospace;
   border-right: 0.1rem solid white;
   animation: ${blinkCaret} 0.75s step-end infinite;
+  min-height: 70px;
   @media (max-width: 768px) {
     font-size: 1.5rem;
+    min-height: 2rem;
   }
 `;
 
