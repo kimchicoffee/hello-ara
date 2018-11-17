@@ -5,6 +5,7 @@ import Hello from "./Hello.jsx";
 import SeedSVG from "./Seed.jsx";
 import FlowerSVG from "./Flower.jsx";
 import araImage from "./ara.jpg";
+import araHeartBeats from "./ara-heartbeats.mp3";
 
 injectGlobal`
   html, body, #___gatsby{
@@ -44,7 +45,7 @@ const Flower = styled(FlowerSVG)`
   height: 300px;
   top: 30%;
   animation: ${bounceFlower} infinite 1s alternate;
-  animation-timing-function: cubic-bezier(.5,0.05,1,.5);
+  animation-timing-function: cubic-bezier(0.5, 0.05, 1, 0.5);
 `;
 
 const Wrapper = styled.div``;
@@ -75,6 +76,7 @@ export default class Scroll extends React.Component {
     const sticky = flower.offsetTop;
     if (window.pageYOffset >= sticky) {
       this.setState({ isFlowerSticky: true });
+      document.getElementsByTagName("audio")[0].play();
     } else {
       this.setState({ isFlowerSticky: false });
     }
@@ -105,6 +107,9 @@ export default class Scroll extends React.Component {
         <Panel background="#38ced7" color="white">
           <AraWrapper>
             <Ara src={araImage} />
+            <audio loop>
+              <source src={araHeartBeats} type="audio/mpeg" />
+            </audio>
           </AraWrapper>
           <Wrapper>
             <Hello />
